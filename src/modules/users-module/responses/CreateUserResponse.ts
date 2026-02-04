@@ -1,6 +1,6 @@
-import { Role } from "../../entities/enums/Role";
+import { Role } from "../entities/enums/Role";
 
-export interface CreateUserResponse {
+export interface UserResponse {
     id: string;
     name: string;
     email: string;

@@ -19,4 +19,22 @@ export class UserRepository implements IUserRepository {
 
         return UserMapper.toDomain(doc);
     }
+
+    async getAllUsers(): Promise<User[]> {
+        const docs = await MongoUserModel.find();
+
+        return docs.map(doc => UserMapper.toDomain(doc));
+    }
+
+    async getUserById(id: string): Promise<User | null> {
+        const doc = await MongoUserModel.findById(id);
+
+        if (!doc) return null;
+
+        return UserMapper.toDomain(doc);
+    }
+
+    async deleteUser(id: string): Promise<void> {
+        await MongoUserModel.findByIdAndDelete(id);
+    }
 }

@@ -7,7 +7,11 @@ const router = express.Router();
 
 const authController = createAuthController();
 
-router.route('/login').post(loginUserRules, validateRequest, authController.login);
+router.route('/login').post(
+    loginUserRules, 
+    validateRequest, 
+    authController.login
+);
 
 const authRouter = router;
 
