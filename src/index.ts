@@ -2,6 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import { connectDB } from './config/MongoDB';
+import { userRouter } from './modules/users-module/routes/UserRoutes';
+import { authRouter } from './modules/auth-module/routes/AuthRoutes';
+import { errorHandler } from './shared/middlewares/ErrorHandler';
 
 dotenv.config();
 
@@ -10,6 +13,11 @@ const app = express();
 app.use(express.json());
 
 app.use(cors());
+
+app.use('/api/users', userRouter);
+app.use('/api/auth', authRouter);
+
+app.use(errorHandler);
 
 const port = process.env.PORT;
 

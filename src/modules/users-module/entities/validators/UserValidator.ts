@@ -1,0 +1,24 @@
+import { RequiredFieldError } from "../../../../shared/errors/RequiredFieldError";
+import { InvalidEmailError } from "../../../../shared/errors/InvalidEmailError";
+import { BadRequestError } from "../../../../shared/errors/BadRequestError";
+import { Role } from "../enums/Role";
+
+export class UserValidator {
+    static validateName(name: string): void {
+        if (!name) throw new RequiredFieldError("Name is required");
+    }
+
+    static validateEmail(email: string): void {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(email)) throw new InvalidEmailError();
+    }
+
+    static validatePasswordHash(passwordHash: string): void {
+        if (!passwordHash) throw new RequiredFieldError("Password hash is required");
+    }
+
+    static validateRole(role: Role): void {
+        if (!Object.values(Role).includes(role)) throw new BadRequestError("Invalid role");
+    }
+}
