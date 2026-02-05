@@ -12,7 +12,7 @@ export class UserMapper {
         );
     }
 
-    static toPersistence(user: User) : User {
+    static toPersistence(user: User): User {
         return {
             _id: user._id,
             name: user.name,

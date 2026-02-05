@@ -4,6 +4,10 @@ import { BadRequestError } from "../../../../shared/errors/BadRequestError";
 import { Role } from "../enums/Role";
 
 export class UserValidator {
+    static validateId(id: string): void {
+        if (!id) throw new RequiredFieldError("Id is required");
+    }
+    
     static validateName(name: string): void {
         if (!name) throw new RequiredFieldError("Name is required");
     }

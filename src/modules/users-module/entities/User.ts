@@ -10,6 +10,7 @@ export class User {
         public passwordHash: string,
         public role: Role = Role.USER
     ) {
+        UserValidator.validateId(_id);
         UserValidator.validateName(name);
         UserValidator.validateEmail(email);
         UserValidator.validatePasswordHash(passwordHash);

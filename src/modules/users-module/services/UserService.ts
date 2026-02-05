@@ -4,7 +4,7 @@ import { EmailAlreadyTakenError } from "../../../shared/errors/EmailAlreadyTaken
 import { IPasswordHasher } from "./ports/IPasswordHasher";
 import { User } from "../entities/User";
 import { randomUUID } from "crypto";
-import { UserResponse } from "../responses/CreateUserResponse";
+import { UserResponse } from "../responses/UserResponse";
 import { GetUsersResponse } from "../responses/GetUsersResponse";
 import { NotFoundError } from "../../../shared/errors/NotFoundError";
 
@@ -19,7 +19,7 @@ export class UserService {
         const passwordHash = await this.passwordHasher.hash(dto.password);
 
         const user = new User(
-            randomUUID() as string,
+            randomUUID(),
             dto.name,
             dto.email,
             passwordHash,
@@ -41,7 +41,7 @@ export class UserService {
 
         return {
             users: users.map(user => ({
-                id: user._id!,
+                id: user._id,
                 name: user.name,
                 email: user.email,
                 role: user.role
