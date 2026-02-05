@@ -5,6 +5,7 @@ import { connectDB } from './config/MongoDB';
 import { userRouter } from './modules/users-module/routes/UserRoutes';
 import { authRouter } from './modules/auth-module/routes/AuthRoutes';
 import { categoryRouter } from './modules/categories-module/routes/CategoryRoutes';
+import { brandRouter } from './modules/brands-module/routes/BrandRoutes';
 import { errorHandler } from './shared/middlewares/ErrorHandler';
 
 dotenv.config();
@@ -18,6 +19,7 @@ app.use(cors());
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/categories', categoryRouter);
+app.use('/api/brands', brandRouter);
 
 app.use(errorHandler);
 

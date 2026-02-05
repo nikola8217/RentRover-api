@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import { CategoryService } from "../services/CategoryService";
-import { CategoryRequest } from "../requests/CategoryRequest";
+import { BrandService } from "../services/BrandService";
+import { BrandRequest } from "../requests/BrandRequest";
 
-export class CategoryController {
-    constructor(private categoryService: CategoryService) {
+export class BrandController {
+    constructor(private brandService: BrandService) {
         this.create = this.create.bind(this);
         this.getAll = this.getAll.bind(this);
         this.getById = this.getById.bind(this);
@@ -13,13 +13,13 @@ export class CategoryController {
 
     async create(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const dto = CategoryRequest.toDto(req);
+            const dto = BrandRequest.toDto(req);
 
-            const category = await this.categoryService.createCategory(dto);
+            const brand = await this.brandService.createBrand(dto);
 
             res.status(201).json({
-                message: "Category created successfully",
-                category
+                message: "Brand created successfully",
+                brand
             });
         } catch (error) {
             next(error);
@@ -28,11 +28,11 @@ export class CategoryController {
 
     async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const categories = await this.categoryService.getAllCategories();
+            const brands = await this.brandService.getAllBrands();
 
             res.status(200).json({
-                message: "Categories fetched successfully",
-                categories
+                message: "Brands fetched successfully",
+                brands
             });
         } catch (error) {
             next(error);
@@ -43,11 +43,11 @@ export class CategoryController {
         try {
             const id = req.params.id as string;
 
-            const category = await this.categoryService.getCategoryById(id);
+            const brand = await this.brandService.getBrandById(id);
 
             res.status(200).json({
-                message: "Category fetched successfully",
-                category
+                message: "Brand fetched successfully",
+                brand
             });
         } catch (error) {
             next(error);
@@ -58,13 +58,13 @@ export class CategoryController {
         try {
             const id = req.params.id as string;
 
-            const dto = CategoryRequest.toDto(req);
+            const dto = BrandRequest.toDto(req);
 
-            const category = await this.categoryService.updateCategory(id, dto);
+            const brand = await this.brandService.updateBrand(id, dto);
 
             res.status(200).json({
-                message: "Category updated successfully",
-                category
+                message: "Brand updated successfully",
+                brand
             });
         } catch (error) {
             next(error);
@@ -75,10 +75,10 @@ export class CategoryController {
         try {
             const id = req.params.id as string;
 
-            await this.categoryService.deleteCategory(id);
+            await this.brandService.deleteBrand(id);
 
             res.status(200).json({
-                message: "Category deleted successfully"
+                message: "Brand deleted successfully"
             });
         } catch (error) {
             next(error);
